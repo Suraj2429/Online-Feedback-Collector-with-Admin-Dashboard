@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback Form</title>
+</head>
+<body>
+    {% extends "layout.html" %}
+    {% block content %}
+
+    {% if success %}
+    <div class="top-alert alert alert-success text-center">
+        Feedback submitted successfully!
+    </div>
+    {% endif %}
+
+    <div class="container">
+
+        <div class="left-section">
+            <img src="{{ url_for('static', filename='images/feedback.jpg') }}" alt="feedback">
+        </div>
+
+        <div class="right-section">
+
+            <div class="form-wrapper">
+                <h2 class="form-title">Feedback Form</h2>
+
+                <form action="/submit-feedback" method="POST" class="card p-4 shadow">
+
+                    <input type="text" name="name" class="form-control mb-3" placeholder="Name" required>
+
+                    <input type="email" name="email" class="form-control mb-3" placeholder="Email" required>
+
+                    <div class="mb-3 text-center">
+                        <label><strong>Rate Us:</strong></label>
+                        <div class="star-rating">
+                            <input type="radio" name="rating" value="5" id="5"><label for="5">★</label>
+                            <input type="radio" name="rating" value="4" id="4"><label for="4">★</label>
+                            <input type="radio" name="rating" value="3" id="3"><label for="3">★</label>
+                            <input type="radio" name="rating" value="2" id="2"><label for="2">★</label>
+                            <input type="radio" name="rating" value="1" id="1" required><label for="1">★</label>
+                        </div>
+                    </div>
+
+                    <textarea name="comments" class="form-control mb-3" placeholder="Comments"></textarea>
+
+                    <button class="btn btn-primary w-100">Submit Feedback</button>
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endblock %}
+</body>
+</html>

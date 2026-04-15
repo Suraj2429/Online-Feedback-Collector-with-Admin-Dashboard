@@ -1,0 +1,270 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #ffffff;
+}
+
+/* Layout */
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    min-height: 100vh;
+    padding: 40px 60px;
+}
+
+/* Left Section */
+.left-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-section img {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+/* Right Section */
+.right-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    margin-top: 0%;
+}
+
+/* Form Wrapper */
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Title */
+.form-title {
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 28px;
+}
+
+/* Card */
+.card {
+    width: 100%;
+    max-width: 420px;
+    padding: 25px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #5f0c0c, #913737);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    color: #fff;
+}
+
+/* Inputs */
+.form-control {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.form-control::placeholder {
+    color: #eee;
+}
+
+.form-control:focus {
+    background: rgba(255,255,255,0.3);
+    outline: none;
+}
+
+/* Star Rating */
+.star-rating {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    direction: rtl;
+    margin-bottom: 20px;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 26px;
+    color: #ccc;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: gold;
+    transform: scale(1.2);
+}
+
+.star-rating input:checked ~ label {
+    color: gold;
+}
+
+/* Button */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    border: none;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* TOP POPUP ALERT */
+.top-alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #28a745;
+    color: white;
+    padding: 14px 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    z-index: 9999;
+    font-weight: 500;
+    animation: slideDown 0.5s ease, fadeOut 0.5s ease 3s forwards;
+}
+
+/* Admin Container */
+.admin-container {
+    padding: 30px;
+}
+
+/* Title */
+.admin-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+/* Stats */
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #0072ff, #00c6ff);
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.stat-card p {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Grid */
+.dashboard-grid {
+    display: flex;
+    gap: 20px;
+}
+
+/* Table Card */
+.table-card {
+    flex: 2;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    overflow-x: auto;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th {
+    background: #f4f6f9;
+    padding: 10px;
+    text-align: left;
+}
+
+table td {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+/* Chart Card */
+.chart-card {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .stats {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .dashboard-grid {
+        flex-direction: column;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        top: -50px;
+        opacity: 0;
+    }
+    to {
+        top: 20px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .left-section {
+        display: none;
+    }
+
+    .card {
+        max-width: 100%;
+    }
+}
