@@ -23,13 +23,26 @@ body {
     font-weight: 700;
 }
 
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    margin-top: 10px;   
+}
+
 .main-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 30px;
     width: 100%;
-    margin-top: 20px;   /* small push down */
+    margin-top: 20px;  
+}
+
+.top-alert.error {
+    background: #dc3545;
 }
 
 .left-section {
@@ -184,7 +197,7 @@ body {
 .stat-card {
     flex: 1;
     min-width: 200px;
-    background: linear-gradient(135deg, #0072ff, #00c6ff);
+    background: linear-gradient(135deg, #5f0c0c, #913737);
     color: white;
     padding: 20px;
     border-radius: 15px;
@@ -263,6 +276,41 @@ table td {
     border-radius: 15px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
+
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.logout-btn {
+    background: #dc3545;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: #c82333;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+    }
+
+    .login-left {
+        display: none;
+    }
+}
+
+
 
 /* Responsive */
 @media (max-width: 768px) {

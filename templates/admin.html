@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Dashboard</title>
-</head>
-<body>
     {% extends "layout.html" %}
     {% block content %}
 
     <div class="admin-container">
 
-        <h2 class="admin-title">Admin Dashboard</h2>
+       <div class="admin-header">
+            <h2 class="admin-title">Admin Dashboard</h2>
+            <a href="/logout" class="logout-btn">Logout</a>
+        </div>
 
         <!-- Stats Cards -->
         <div class="stats">
@@ -103,5 +100,3 @@
     </script>
 
     {% endblock %}
-</body>
-</html>

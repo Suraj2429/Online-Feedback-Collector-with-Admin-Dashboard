@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("JS Loaded ✅");
+    console.log("JS Loaded");
 
     const form = document.querySelector("form");
 

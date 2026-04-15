@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if error %}
+<div class="top-alert error">
+    Invalid Credentials ❌
+</div>
+{% endif %}
+
+<div class="page-header">
+    <h2>Admin Login</h2>
+</div>
+
+<div class="container">
+
+    <div class="main-wrapper">
+
+        <div class="left-section">
+            <img src="{{ url_for('static', filename='images/admin-login.jpg') }}">
+        </div>
+
+        <div class="right-section">
+
+            <div class="">
+
+                <form method="POST" class="card" novalidate>
+
+                    <input type="text" name="username" class="form-control" placeholder="Username" required>
+
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+
+                    <button type="submit" class="btn-primary" >Login</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+    {% endblock %}

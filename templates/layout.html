@@ -13,8 +13,9 @@
     {% block content %}{% endblock %}
 </div>
 
-<!-- Custom JS -->
+{% if request.endpoint == 'home' %}
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endif %}
 
 </body>
 </html>

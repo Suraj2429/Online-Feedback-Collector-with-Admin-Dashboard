@@ -1,12 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for, Response
+from flask import Flask, render_template, request, redirect, url_for, Response, session
 import sqlite3
 from datetime import datetime
-import csv
 
 app = Flask(__name__)
+app.secret_key = "secret123"
 
 # Database Connection
-
 def get_db_connection():
     conn = sqlite3.connect('database.db')
     conn.row_factory = sqlite3.Row
@@ -27,17 +26,14 @@ def create_table():
     ''')
     conn.commit()
     conn.close()
-    print("Table Created!")
 
 create_table()
-
 
 # Home Route
 @app.route('/')
 def home():
     success = request.args.get('success')
     return render_template('index.html', success=success)
-
 
 # Submit Feedback
 @app.route('/submit-feedback', methods=['POST'])
@@ -56,12 +52,31 @@ def submit_feedback():
     conn.commit()
     conn.close()
 
-    # Redirect with success popup trigger
     return redirect(url_for('home', success=1))
 
-# Admin Dashboard
+# ✅ Admin Login
+@app.route('/admin-login', methods=['GET', 'POST'])
+def admin_login():
+    error = request.args.get('error')
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        if username == "admin" and password == "admin123":
+            session['admin'] = True
+            return redirect(url_for('admin'))
+        else:
+            return redirect(url_for('admin_login', error=1))
+
+    return render_template('login.html', error=error)
+
+# ✅ Protected Admin Dashboard (FIXED)
 @app.route('/admin-dashboard')
 def admin():
+    if not session.get('admin'):
+        return redirect(url_for('admin_login'))
+
     conn = get_db_connection()
     feedbacks = conn.execute("SELECT * FROM Feedback").fetchall()
 
@@ -98,6 +113,22 @@ def download_csv():
         mimetype='text/csv',
         headers={"Content-Disposition": "attachment; filename=feedback.csv"}
     )
+
+# ✅ API
+@app.route('/api/feedback')
+def api_feedback():
+    conn = get_db_connection()
+    feedbacks = conn.execute("SELECT * FROM Feedback").fetchall()
+    conn.close()
+
+    data = [dict(row) for row in feedbacks]
+    return {"feedback": data}
+
+# ✅ Logout
+@app.route('/logout')
+def logout():
+    session.pop('admin', None)
+    return redirect(url_for('home'))
 
 if __name__ == '__main__':
     app.run(debug=True)
