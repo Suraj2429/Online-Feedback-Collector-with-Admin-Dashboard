@@ -8,29 +8,31 @@
     {% block content %}
 
     {% if success %}
-    <div class="top-alert alert alert-success text-center">
+    <div class="top-alert">
         Feedback submitted successfully!
     </div>
     {% endif %}
 
+    <div class="page-header">
+        <h2>Feedback Form</h2>
+    </div>
+
     <div class="container">
 
-        <div class="left-section">
-            <img src="{{ url_for('static', filename='images/feedback.jpg') }}" alt="feedback">
-        </div>
+        <div class="main-wrapper">
 
-        <div class="right-section">
+            <div class="left-section">
+                <img src="{{ url_for('static', filename='images/feedback.jpg') }}">
+            </div>
 
-            <div class="form-wrapper">
-                <h2 class="form-title">Feedback Form</h2>
+            <div class="right-section">
+                <form action="/submit-feedback" method="POST" class="card">
 
-                <form action="/submit-feedback" method="POST" class="card p-4 shadow">
+                    <input type="text" name="name" class="form-control" placeholder="Name" required>
 
-                    <input type="text" name="name" class="form-control mb-3" placeholder="Name" required>
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
 
-                    <input type="email" name="email" class="form-control mb-3" placeholder="Email" required>
-
-                    <div class="mb-3 text-center">
+                    <div class="rating-box">
                         <label><strong>Rate Us:</strong></label>
                         <div class="star-rating">
                             <input type="radio" name="rating" value="5" id="5"><label for="5">★</label>
@@ -41,9 +43,9 @@
                         </div>
                     </div>
 
-                    <textarea name="comments" class="form-control mb-3" placeholder="Comments"></textarea>
+                    <textarea name="comments" class="form-control" placeholder="Comments"></textarea>
 
-                    <button class="btn btn-primary w-100">Submit Feedback</button>
+                    <button class="btn-primary">Submit Feedback</button>
 
                 </form>
             </div>
