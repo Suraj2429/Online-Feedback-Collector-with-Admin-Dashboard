@@ -54,8 +54,8 @@ def submit_feedback():
 
     return redirect(url_for('home', success=1))
 
-# ✅ Admin Login
-@app.route('/admin-login', methods=['GET', 'POST'])
+# Admin Login
+@app.route('/admin', methods=['GET', 'POST'])
 def admin_login():
     error = request.args.get('error')
 
@@ -71,7 +71,7 @@ def admin_login():
 
     return render_template('login.html', error=error)
 
-# ✅ Protected Admin Dashboard (FIXED)
+# Protected Admin Dashboard (FIXED)
 @app.route('/admin-dashboard')
 def admin():
     if not session.get('admin'):
@@ -114,7 +114,7 @@ def download_csv():
         headers={"Content-Disposition": "attachment; filename=feedback.csv"}
     )
 
-# ✅ API
+# API
 @app.route('/api/feedback')
 def api_feedback():
     conn = get_db_connection()
@@ -124,11 +124,20 @@ def api_feedback():
     data = [dict(row) for row in feedbacks]
     return {"feedback": data}
 
-# ✅ Logout
+# Logout
 @app.route('/logout')
 def logout():
     session.pop('admin', None)
     return redirect(url_for('home'))
+
+# Delete All Feedback
+@app.route('/delete-all')
+def delete_all():
+    conn = get_db_connection()
+    conn.execute("DELETE FROM Feedback")
+    conn.commit()
+    conn.close()
+    return redirect(url_for('admin'))
 
 if __name__ == '__main__':
     app.run(debug=True)

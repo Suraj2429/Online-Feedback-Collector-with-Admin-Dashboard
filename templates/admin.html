@@ -1,102 +1,120 @@
-    {% extends "layout.html" %}
-    {% block content %}
+{% extends "layout.html" %}
+{% block content %}
 
-    <div class="admin-container">
+<div class="admin-container">
 
-       <div class="admin-header">
-            <h2 class="admin-title">Admin Dashboard</h2>
-            <a href="/logout" class="logout-btn">Logout</a>
+    <!-- Header -->
+    <div class="admin-header">
+        <h2 class="admin-title">Admin Dashboard</h2>
+        <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats">
+
+        <div class="stat-card">
+            <h4>Total Feedback</h4>
+            <p>{{ total_feedback }}</p>
         </div>
 
-        <!-- Stats Cards -->
-        <div class="stats">
-
-            <div class="stat-card">
-                <h4>Total Feedback</h4>
-                <p>{{ total_feedback }}</p>
-            </div>
-
-            <div class="stat-card">
-                <h4>Average Rating</h4>
-                <p>{{ avg_rating }}</p>
-            </div>
-
-            <div class="stat-card">
-                <h4>Top Rating</h4>
-                <p>5</p>
-            </div>
-
+        <div class="stat-card">
+            <h4>Average Rating</h4>
+            <p>{{ avg_rating }}</p>
         </div>
 
-        <div class="download-section">
-            <a href="/download-csv" class="download-btn">⬇ Download CSV</a>
-        </div>
-
-        <!-- Table + Chart -->
-        <div class="dashboard-grid">
-
-            <!-- Table -->
-            <div class="table-card">
-                <h4>Feedback List</h4>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Rating</th>
-                            <th>Comments</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {% for f in feedbacks %}
-                        <tr>
-                            <td>{{ f.name }}</td>
-                            <td>{{ f.email }}</td>
-                            <td>{{ f.rating }} ⭐</td>
-                            <td>{{ f.comments }}</td>
-                            <td>{{ f.date_submitted }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Chart -->
-            <div class="chart-card">
-                <h4>Ratings Overview</h4>
-                <canvas id="ratingChart"></canvas>
-            </div>
-
+        <div class="stat-card">
+            <h4>Top Rating</h4>
+            <p>5</p>
         </div>
 
     </div>
 
-    <!-- Chart JS -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Download -->
+    <div class="download-section">
+        <a href="/download-csv" class="download-btn">⬇ Download CSV</a>
+    </div>
 
-    <script>
-        const ratings = {{ feedbacks | map(attribute='rating') | list }};
-        const counts = [0,0,0,0,0];
+    <!-- Table + Chart -->
+    <div class="dashboard-grid">
 
-        ratings.forEach(r => counts[r-1]++);
+        <!-- TABLE -->
+        <div class="table-card">
+            <div class="table-header">
+                <h4>Feedback List</h4>
+                <a href="#" class="delete-btn" onclick="openDeletePopup(); return false;">
+                   🗑 Delete All
+                </a>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Rating</th>
+                        <th>Comments</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
 
-        new Chart(document.getElementById('ratingChart'), {
-            type: 'bar',
-            data: {
-                labels: ['1','2','3','4','5'],
-                datasets: [{
-                    label: 'Ratings Count',
-                    data: counts,
-                    backgroundColor: '#0072ff'
-                }]
-            },
-            options: {
-                responsive: true
-            }
-        });
-    </script>
+                <tbody>
+                    {% for f in feedbacks %}
+                    <tr>
+                        <td>{{ f.name }}</td>
+                        <td>{{ f.email }}</td>
+                        <td>{{ f.rating }} ⭐</td>
+                        <td>{{ f.comments }}</td>
+                        <td>{{ f.date_submitted }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-    {% endblock %}
+        </div>
+
+        <!-- CHART -->
+        <div class="chart-card">
+            <h4>Ratings Overview</h4>
+            <canvas id="ratingChart"></canvas>
+        </div>
+
+    </div>
+
+    <div id="deletePopup" class="custom-popup">
+    <div class="popup-box">
+        <p>Are you sure you want to delete all feedback?</p>
+
+        <div class="popup-actions">
+            <button onclick="confirmDelete()" class="btn-danger">Delete</button>
+            <button onclick="closePopup()" class="btn-secondary">Cancel</button>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<!-- Chart JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ratings = {{ feedbacks | map(attribute='rating') | list }};
+    const counts = [0,0,0,0,0];
+
+    ratings.forEach(r => counts[r-1]++);
+
+    new Chart(document.getElementById('ratingChart'), {
+        type: 'bar',
+        data: {
+            labels: ['1','2','3','4','5'],
+            datasets: [{
+                label: 'Ratings Count',
+                data: counts,
+                backgroundColor: '#0072ff'
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
+
+{% endblock %}
