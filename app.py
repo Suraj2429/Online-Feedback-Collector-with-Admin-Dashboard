@@ -55,7 +55,7 @@ def submit_feedback():
     return redirect(url_for('home', success=1))
 
 # Admin Login
-@app.route('/admin', methods=['GET', 'POST'])
+@app.route('/admin-login', methods=['GET', 'POST'])
 def admin_login():
     error = request.args.get('error')
 
@@ -65,15 +65,15 @@ def admin_login():
 
         if username == "admin" and password == "admin123":
             session['admin'] = True
-            return redirect(url_for('admin'))
+            return redirect(url_for('admin_dashboard'))
         else:
             return redirect(url_for('admin_login', error=1))
 
     return render_template('login.html', error=error)
 
-# Protected Admin Dashboard (FIXED)
+# Admin Dashboard 
 @app.route('/admin-dashboard')
-def admin():
+def admin_dashboard():
     if not session.get('admin'):
         return redirect(url_for('admin_login'))
 
@@ -133,11 +133,15 @@ def logout():
 # Delete All Feedback
 @app.route('/delete-all')
 def delete_all():
+    if not session.get('admin'):
+        return redirect(url_for('admin_login'))
+
     conn = get_db_connection()
     conn.execute("DELETE FROM Feedback")
     conn.commit()
     conn.close()
-    return redirect(url_for('admin'))
+
+    return redirect(url_for('admin_dashboard'))
 
 if __name__ == '__main__':
     app.run(debug=True)

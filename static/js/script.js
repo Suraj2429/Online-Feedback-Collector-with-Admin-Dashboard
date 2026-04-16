@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("JS Loaded");
 
-    const form = document.querySelector("form");
+    const form = document.querySelector('form[action="/submit-feedback"]');
 
     if (form) {
         form.addEventListener("submit", function (e) {
@@ -14,34 +14,42 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Success popup 
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('success')) {
-        const modal = new bootstrap.Modal(document.getElementById('successModal'));
+    const successModal = document.getElementById('successModal');
+
+    if (urlParams.get('success') && successModal) {
+        const modal = new bootstrap.Modal(successModal);
         modal.show();
     }
 });
 
-
-/* CUSTOM RATING POPUP */
-
 function showRatingPopup() {
-    document.getElementById("ratingPopup").style.display = "flex";
+    const popup = document.getElementById("ratingPopup");
+    if (popup) {
+        popup.style.display = "flex";
+    }
 }
 
 function closeRatingPopup() {
-    document.getElementById("ratingPopup").style.display = "none";
+    const popup = document.getElementById("ratingPopup");
+    if (popup) {
+        popup.style.display = "none";
+    }
 }
 
 
-/* DELETE POPUP */
-
 function openDeletePopup() {
-    document.getElementById("deletePopup").style.display = "flex";
+    const popup = document.getElementById("deletePopup");
+    if (popup) {
+        popup.style.display = "flex";
+    }
 }
 
 function closePopup() {
-    document.getElementById("deletePopup").style.display = "none";
+    const popup = document.getElementById("deletePopup");
+    if (popup) {
+        popup.style.display = "none";
+    }
 }
 
 function confirmDelete() {
