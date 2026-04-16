@@ -78,24 +78,29 @@ OnlineFeedbackCollector/
 ```bash
 git clone <your-repo-link>
 cd OnlineFeedbackCollector
+```
 
 
 ### 2️⃣ Create Virtual Environment
 ``` bash 
 python -m venv venv
 venv\Scripts\activate
+```
 
 
 ### 3️⃣ Install Dependencies
 ``` bash 
 pip install -r requirements.txt
+```
 
 
 ### 4️⃣ Run Application
 ``` bash 
 python app.py
+```
 
 
 ### 5️⃣ Open in Browser
 ``` bash 
 http://127.0.0.1:5000/
+```
