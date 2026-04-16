@@ -87,7 +87,7 @@ OnlineFeedbackCollector/
 
 ### 1️⃣ Clone Repository
 ```bash
-git clone https://github.com/your-username/OnlineFeedbackCollector.git
+git clone https://github.com/Suraj2429/Online-Feedback-Collector-with-Admin-Dashboard.git
 cd OnlineFeedbackCollector
 ```
 
