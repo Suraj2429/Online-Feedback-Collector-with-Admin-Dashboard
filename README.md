@@ -3,7 +3,7 @@
 ## 📌 Project Overview
 The **Online Feedback Collector** is a full-stack web application that allows users to submit feedback and enables administrators to view, analyze, and manage feedback data through an interactive dashboard.
 
-This project demonstrates real-world web development skills including frontend design, backend processing, database integration, and data visualization.
+This project demonstrates real-world web development skills including frontend design, backend logic, database integration, authentication, and data visualization.
 
 ---
 
@@ -15,34 +15,41 @@ This project demonstrates real-world web development skills including frontend d
   - Email
   - Rating (⭐ 1–5 star system)
   - Comments
-- Responsive and modern UI
-- Success popup notification after submission
+- Clean and responsive UI
+- Custom validation popup for rating
+- Success notification after submission
+
+---
 
 ### 🛠️ Admin Dashboard
+- Secure admin login system 🔐
 - View all feedback in a structured table
 - Total feedback count
 - Average rating calculation
-- Visual analytics using charts (Chart.js)
-- Download feedback data as CSV
+- Top rating display
+- Visual analytics using **Chart.js**
+- Download feedback as CSV
+- Delete all feedback with confirmation popup
+- Logout functionality
 
 ---
 
 ## 🧰 Tech Stack
 
-### Frontend
+### 🎨 Frontend
 - HTML5
 - CSS3 (Custom + Responsive Design)
-- Bootstrap
+- Bootstrap 5
 - JavaScript
 
-### Backend
+### ⚙️ Backend
 - Python
 - Flask
 
-### Database
+### 🗄️ Database
 - SQLite
 
-### Visualization
+### 📊 Visualization
 - Chart.js
 
 ---
@@ -52,7 +59,7 @@ OnlineFeedbackCollector/
 │
 ├── app.py # Flask backend
 ├── database.db # SQLite database
-├── requirements.txt # Python dependencies
+├── requirements.txt # Dependencies
 │
 ├── static/
 │ ├── css/
@@ -60,14 +67,18 @@ OnlineFeedbackCollector/
 │ ├── js/
 │ │ └── script.js # JS logic
 │ └── images/
-│ └── feedback.jpg # UI image
+│ └── feedback.jpg # UI images
 │
 ├── templates/
-│ ├── index.html # User form
-│ ├── admin.html # Dashboard
+│ ├── index.html # User feedback form
+│ ├── admin.html # Admin dashboard
+│ ├── login.html # Admin login
 │ └── layout.html # Base template
 │
 └── README.md # Documentation
+
+
+---
 
 
 ---
@@ -76,31 +87,35 @@ OnlineFeedbackCollector/
 
 ### 1️⃣ Clone Repository
 ```bash
-git clone <your-repo-link>
+git clone https://github.com/your-username/OnlineFeedbackCollector.git
 cd OnlineFeedbackCollector
 ```
 
-
 ### 2️⃣ Create Virtual Environment
-``` bash 
+``` bash
 python -m venv venv
-venv\Scripts\activate
+venv\Scripts\activate   # Windows
+# OR
+source venv/bin/activate   # Mac/Linux
 ```
 
-
 ### 3️⃣ Install Dependencies
-``` bash 
+``` bash
 pip install -r requirements.txt
 ```
 
-
 ### 4️⃣ Run Application
-``` bash 
+``` bash
 python app.py
 ```
 
-
 ### 5️⃣ Open in Browser
-``` bash 
+``` bash
 http://127.0.0.1:5000/
 ```
+
+---
+
+### 🔐 Admin Login Credentials
+Username: admin
+Password: admin123
